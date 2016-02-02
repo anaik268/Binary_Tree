@@ -16,7 +16,12 @@ public class Node {
 	public void setValue(int value) {
 		this.value = value;
 	}
-
+	
+	public Node[] childrens(Node v)
+	{
+		Node[] children = {v.getLeftChild(), v.getRightChild()};
+		return children;
+	}
 	public Node getLeftChild() {
 		return leftChild;
 	}
