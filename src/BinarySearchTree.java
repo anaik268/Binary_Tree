@@ -9,26 +9,32 @@ public class BinarySearchTree {
 			root = temp;
 			return;
 		}
-		Node ptr = this.root;
-		while (ptr.getValue() != value) {
-			if (temp.getValue() < ptr.getValue()) {
-				if (ptr.getLeftChild() == null) {
-					System.out.println("left child of: " + ptr.getValue() + " is: " + value);
-					ptr.setLeftChild(temp);
-				}
+		Node ptr = this.root, prev = null;
+
+		while (ptr != null) {
+			if (ptr.getValue() > value) {
+				prev = ptr;
 				ptr = ptr.getLeftChild();
 			} else {
-				if (ptr.getRightChild() == null) {
-					System.out.println("Right child of: " + ptr.getValue() + " is: " + value);
-					ptr.setRightChild(temp);
-				}
+				prev = ptr;
 				ptr = ptr.getRightChild();
 			}
 		}
+		if (prev.getValue() > value) {
+			System.out.println("left child of: " + prev.getValue() + " is: " + value);
+			prev.setLeftChild(temp);
+		} else {
+			System.out.println("Right child of: " + prev.getValue() + " is: " + value);
+			prev.setRightChild(temp);
+		}
+	}
+
+	public void insertRec(Node ptr, int value) {
+
 	}
 
 	public Node search(Node ptr, int value) {
-		if(ptr == null)
+		if (ptr == null)
 			return null;
 		if (ptr.getValue() == value)
 			return ptr;
@@ -39,10 +45,11 @@ public class BinarySearchTree {
 
 		return null;
 	}
-	
+
 	public Node getRoot() {
 		return this.root;
 	}
+
 	public void remove(Node v) {
 
 	}
