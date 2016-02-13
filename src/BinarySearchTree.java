@@ -29,8 +29,29 @@ public class BinarySearchTree {
 		}
 	}
 
+	//Recursive insert into binary tree
 	public void insertRec(Node ptr, int value) {
-
+		if(root == null) {
+			root = new Node(value);
+			return;
+		}
+		if(ptr.getValue() > value) {
+			if(ptr.getLeftChild() != null)
+				insertRec(ptr.getLeftChild(), value);
+			else {
+				ptr.setLeftChild(new Node(value));
+				System.out.println("left child of: " + ptr.getValue() + " is: " + value);
+			}
+		}
+		if(ptr.getValue() < value)
+		{
+			if(ptr.getRightChild() != null)
+				insertRec(ptr.getRightChild(), value);
+			else {
+				ptr.setRightChild(new Node(value));
+				System.out.println("Right child of: " + ptr.getValue() + " is: " + value);
+			}
+		}
 	}
 
 	public Node search(Node ptr, int value) {
@@ -107,5 +128,4 @@ public class BinarySearchTree {
 		printPostOrder(v.getRightChild());
 		System.out.print(v.getValue() + " ");
 	}
-
 }

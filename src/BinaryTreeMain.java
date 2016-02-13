@@ -7,7 +7,7 @@ public class BinaryTreeMain {
 		System.out.println("Begin Entering values in tree!");
 		
 		for(int i : values)
-			bstHandle.insert(i);
+			bstHandle.insertRec(bstHandle.getRoot(),i);
 		
 		System.out.println("Done inserting the values in tree!\n");
 		
