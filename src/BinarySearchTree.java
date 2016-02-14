@@ -29,29 +29,68 @@ public class BinarySearchTree {
 		}
 	}
 
-	//Recursive insert into binary tree
+	// Recursive insert into binary tree
 	public void insertRec(Node ptr, int value) {
-		if(root == null) {
+		if (root == null) {
 			root = new Node(value);
 			return;
 		}
-		if(ptr.getValue() > value) {
-			if(ptr.getLeftChild() != null)
+		if (ptr.getValue() > value) {
+			if (ptr.getLeftChild() != null)
 				insertRec(ptr.getLeftChild(), value);
 			else {
 				ptr.setLeftChild(new Node(value));
 				System.out.println("left child of: " + ptr.getValue() + " is: " + value);
 			}
-		}
-		if(ptr.getValue() < value)
-		{
-			if(ptr.getRightChild() != null)
+		} else {
+			if (ptr.getRightChild() != null)
 				insertRec(ptr.getRightChild(), value);
 			else {
 				ptr.setRightChild(new Node(value));
 				System.out.println("Right child of: " + ptr.getValue() + " is: " + value);
 			}
 		}
+	}
+
+	public Node delete(int value) {
+		Node x = root, p = null;
+		while (x != null) {
+			if (x.getValue() == value)
+				break;
+			p = x;
+			x = x.getValue() > value ? x.getLeftChild() : x.getRightChild();
+		}
+		
+		// Node not found
+		if (x == null) {
+			throw new IllegalArgumentException();
+		}
+		
+		// Handle the case where node to remove has 2 children.
+		if (x.getLeftChild() != null && x.getRightChild() != null) {
+			Node y = x.getLeftChild();
+			p = x;
+			while (y.getRightChild() != null) {
+				p = y;
+				y = y.getRightChild();
+			}
+			x.setValue(y.getValue());
+			x = y;
+		}
+		
+		// If root node was to be replaced, we need to return the new node which we replaced
+		if(p == null)
+			return x.getLeftChild() != null ? x.getLeftChild() : x.getRightChild();
+			
+		// Handle the case where its leaf node of just 1 child
+		Node temp = x.getLeftChild() != null ? x.getLeftChild() : x.getRightChild();
+		if (p.getLeftChild() == x) {
+			p.setLeftChild(temp);
+		} else {
+			p.setRightChild(temp);
+		}
+
+		return root;
 	}
 
 	public Node search(Node ptr, int value) {
