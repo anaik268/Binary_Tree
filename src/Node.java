@@ -42,7 +42,4 @@ public class Node {
 	public String toString() {
 		return "Node [value=" + value + ", leftChild=" + leftChild + ", rightChild=" + rightChild + "]";
 	}
-
-	
-
 }

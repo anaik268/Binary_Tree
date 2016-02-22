@@ -60,12 +60,12 @@ public class BinarySearchTree {
 			p = x;
 			x = x.getValue() > value ? x.getLeftChild() : x.getRightChild();
 		}
-		
+
 		// Node not found
 		if (x == null) {
 			throw new IllegalArgumentException();
 		}
-		
+
 		// Handle the case where node to remove has 2 children.
 		if (x.getLeftChild() != null && x.getRightChild() != null) {
 			Node y = x.getLeftChild();
@@ -77,11 +77,12 @@ public class BinarySearchTree {
 			x.setValue(y.getValue());
 			x = y;
 		}
-		
-		// If root node was to be replaced, we need to return the new node which we replaced
-		if(p == null)
+
+		// If root node was to be replaced, we need to return the new node which
+		// we replaced
+		if (p == null)
 			return x.getLeftChild() != null ? x.getLeftChild() : x.getRightChild();
-			
+
 		// Handle the case where its leaf node of just 1 child
 		Node temp = x.getLeftChild() != null ? x.getLeftChild() : x.getRightChild();
 		if (p.getLeftChild() == x) {
@@ -166,5 +167,30 @@ public class BinarySearchTree {
 		printPostOrder(v.getLeftChild());
 		printPostOrder(v.getRightChild());
 		System.out.print(v.getValue() + " ");
+	}
+
+	public int maxHeight(Node v) {
+		if (v == null)
+			return 0;
+		else
+			return 1 + Math.max(maxHeight(v.getLeftChild()), maxHeight(v.getRightChild()));
+	}
+
+	public NodeAndLevel deepestNode(Node v, int level) {
+		if (v.getLeftChild() == null && v.getRightChild() == null)
+			return new NodeAndLevel(v, level);
+		else if (v.getLeftChild() == null)
+			return deepestNode(v.getRightChild(), level + 1);
+		else if (v.getRightChild() == null)
+			return deepestNode(v.getLeftChild(), level + 1);
+		else {
+			level++;
+			NodeAndLevel x = deepestNode(v.getLeftChild(), level);
+			NodeAndLevel y = deepestNode(v.getRightChild(), level);
+			if(x.level > y.level)
+				return x;
+			else
+				return y;
+		}
 	}
 }
