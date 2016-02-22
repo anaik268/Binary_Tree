@@ -187,10 +187,11 @@ public class BinarySearchTree {
 			level++;
 			NodeAndLevel x = deepestNode(v.getLeftChild(), level);
 			NodeAndLevel y = deepestNode(v.getRightChild(), level);
-			if(x.level > y.level)
+			if (x.level > y.level)
 				return x;
 			else
 				return y;
 		}
 	}
+
 }
