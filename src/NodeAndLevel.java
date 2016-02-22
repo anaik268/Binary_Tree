@@ -12,5 +12,5 @@ public class NodeAndLevel {
 	public String toString() {
 		return "NodeAndLevel [n=" + n + ", level=" + level + "]";
 	}
-	
+
 }

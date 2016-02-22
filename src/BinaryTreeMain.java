@@ -31,7 +31,7 @@ public class BinaryTreeMain {
 
 		System.out.println("Max height of the tree is: " + bstHandle.maxHeight(bstHandle.getRoot()));
 		System.out.println("Max height of the tree is: " + bstHandle.deepestNode(bstHandle.getRoot(), 0));
-		int[] testArr = {60, 39, 74, 27, 43, 71, 96, 29, 53, 73, 49};
+		int[] testArr = { 60, 39, 74, 27, 43, 71, 96, 29, 53, 73, 49 };
 		System.out.println("\n\nBegin Entering values in tree 2!");
 
 		for (int i : testArr)
@@ -40,7 +40,25 @@ public class BinaryTreeMain {
 		System.out.println("Done inserting the values in tree!\n");
 		System.out.println("Max height of the tree is: " + bstHandle1.maxHeight(bstHandle1.getRoot()));
 		System.out.println("Max height of the tree is: " + bstHandle1.deepestNode(bstHandle1.getRoot(), 0));
-		
 
+		System.out.println("Is Binary Tree check: " + isBST(bstHandle1.getRoot()));
+	}
+
+	/*
+	 * This function checks if the given tree is a binary search tree or not
+	 */
+	public static boolean isBST(Node v) {
+		if (v.getLeftChild() == null && v.getRightChild() == null)
+			return true;
+		else if (v.getLeftChild() == null) {
+			return v.getRightChild().getValue() > v.getValue() ? isBST(v.getRightChild()) : false;
+		} else if (v.getRightChild() == null) {
+			return v.getLeftChild().getValue() < v.getValue() ? isBST(v.getLeftChild()) : false;
+		} else {
+			if (v.getLeftChild().getValue() < v.getValue() && v.getRightChild().getValue() > v.getValue())
+				return (isBST(v.getLeftChild()) && isBST(v.getRightChild()));
+			else
+				return false;
+		}
 	}
 }
